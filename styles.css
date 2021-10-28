@@ -1,0 +1,8 @@
+.bit {
+    border: 1px solid gray;
+    min-width: 20px;
+    min-height: 20px;
+    display: inline-block;
+    margin-right: 2px;
+    color: white;
+  }
