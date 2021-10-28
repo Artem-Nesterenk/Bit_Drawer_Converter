@@ -1,7 +1,13 @@
+
 const container = document.getElementById("grid_div");
 let rows = document.getElementsByClassName("gridRow");
 let cells = document.getElementsByClassName("bit");
 var result = document.getElementById("result_div");
+
+
+document.getElementsByClassName("bit").onclick = function(){
+    console.log(this);
+}
 
 document.getElementById("gen_button").onclick = function () {
     let x_res = document.getElementById("x_resolution").value;
@@ -10,20 +16,6 @@ document.getElementById("gen_button").onclick = function () {
     result.innerText = " ";
     make_grid(x_res, y_res);
 
-    for(let i = 0; i < cells.length; i++)
-    {
-        cells[i].onclick = function()
-        {
-            if(document.getElementById("bit_" + i).style.backgroundColor == "black")
-            {
-                document.getElementById("bit_" + i).style.backgroundColor = "white";
-            }
-            else
-            {
-                document.getElementById("bit_" + i).style.backgroundColor = "black";
-            }
-        }
-    }
 };
 
 function validate(evt) 
@@ -76,29 +68,46 @@ function makeRows(rowNum) {
 //Creates columns
 function makeColumns(cellNum) {
     let id = 0;
-    console.log(rows);
-    console.log(cellNum);
     for (i = 0; i < rows.length; i++) 
     {
         for (j = 0; j < cellNum; j++) 
         {
             let newCell = document.createElement("div");
             rows[i].appendChild(newCell).className = "bit";
-            rows[i].appendChild(newCell).id = "bit_" + id++;
-        };
-
+            rows[i].appendChild(newCell).id = "bit_" + (j*8 + i);
+            newCell.onclick = function(){            
+                if(this.style.backgroundColor == "black")
+                {
+                    this.style.backgroundColor = "white";
+                }
+                else
+                {
+                    this.style.backgroundColor = "black";
+                }
+            };
+        }
     };
 };
 
+
 document.getElementById("Output_button").onclick = function () {
-    result.innerText = " ";
-    let out_string = "{";
-    out_string += (" 0x" + ((document.getElementById("bit_0").style.backgroundColor == "black") ? "00" : "FF")); 
-    for(let i = 1; i < cells.length; i++)
+    var out = [];
+    var bit = 0;
+    result.innerText = "{ ";
+    for(let i = 0; i < 1024; i++)
     {
-        out_string += (", 0x" + ((document.getElementById("bit_" + i).style.backgroundColor == "black") ? "00" : "FF")); 
-    }
-    out_string += " };"
-    
-    result.innerText += out_string;
+        console.log(cells[i])
+        out_string = (cells[i].style.backgroundColor == "black") ? 0 : 1; 
+        out[parseInt(i%8)] = (out[parseInt(i%8)] | (out_string << parseInt(i / 8)));
+    }   
+    out.forEach(el => {
+        result.innerText += "0x";
+        result.innerText += el.toString(16);
+            result.innerText += ", "
+    });
+    console.log(cells.length);
+    console.log(out);
+    result.innerText += "}"
 };
+
+

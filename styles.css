@@ -1,3 +1,4 @@
+
 .bit {
     border: 1px solid gray;
     min-width: 20px;
@@ -6,3 +7,7 @@
     margin-right: 2px;
     color: white;
   }
+
+#result_div{
+  font-size: 85px;
+}
