@@ -12,8 +12,9 @@ document.getElementById("output_button").onclick = function ()
     var bit = 0;
     let x_res = document.getElementById("x_resolution").value;
     let y_res = document.getElementById("y_resolution").value;
-        let bit_arr = [];
-        let tmp_arr = [];
+
+    let bit_arr = [];
+    let tmp_arr = [];
     for(let mem_part = 0; mem_part < x_res / 8; mem_part++)
     {
         for(let x_cord = 0; x_cord < y_res; x_cord++)
@@ -55,6 +56,13 @@ document.getElementById("gen_button").onclick = function ()
 {
     let x_res = document.getElementById("x_resolution").value;
     let y_res = document.getElementById("y_resolution").value;
+    
+    if(x_res % 8 != 0)
+    {
+        alert("Invalid memory allocation \nOnly multiples of 8 are allowed for y resolution")
+        return;
+    }
+
     remove_grid();
     result.innerText = " ";
     make_grid(x_res, y_res);
