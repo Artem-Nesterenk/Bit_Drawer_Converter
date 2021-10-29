@@ -5,18 +5,24 @@
         <link rel="stylesheet" href="styles.css">
     </head>
 <body>
+    <h1> Bitmap generator</h1>
+    <h2> NOTE: only multiples of 8 are allowed</h2>
     <br>
     <div style = "text-align: center;">
-        <input type = "text" onkeypress='validate(event)' id = "x_resolution">
-        <input type = "text" onkeypress='validate(event)' id = "y_resolution">
-
+        <input type = "text" placeholder="x_resolution" onkeypress='validate(event)' id = "y_resolution">
+        <input type = "text" placeholder="y_resolution" onkeypress='validate(event)' id = "x_resolution">
+<br>
+<br>
         <button id = "gen_button">GENERATE</button>
-        <button id = "Output_button">Convert</button>
+        <button id = "output_button">Convert</button>
     </div>
     <br>
     <div id ="grid_div" style = "text-align: center;">
     </div>
-    <div id = "result_div" style = " text-align: center;">
+    <div id = "result_div" style = "min-height: 100px;height:30%; width:80%;margin-left: 10%; border:1px solid #ccc;font:50px;overflow:auto;">
+    </div>
+    <div id="copy_div">
+        <button id = "copy_button">Copy buffer</button>
     </div>
 </body>
 <script type = "text/javascript" src = "index.js"></script>
